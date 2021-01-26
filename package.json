@@ -11,6 +11,7 @@
       "eslint": "^7.18.0",
       "eslint-config-prettier": "^7.2.0",
       "eslint-plugin-prettier": "^3.3.1",
+      "husky": "^5.0.6",
       "morgan": "^1.10.0",
       "prettier": "^2.2.1",
       "ts-node": "^9.1.1",
@@ -22,17 +23,19 @@
       "reflect-metadata": "^0.1.10",
       "typeorm": "0.2.30"
    },
-      "husky": {
-          "hooks": {
-              "pre-commit": "lint-staged"
-          }
-      },
-      "lint-staged": {
-          "*.{js,ts,tsx}": [
-              "eslint --fix"
-          ]
-      },
+   "husky": {
+      "hooks": {
+         "pre-commit": "lint-staged"
+      }
+   },
+   "lint-staged": {
+      "*.{js,ts,tsx}": [
+         "eslint --fix"
+      ]
+   },
    "scripts": {
-      "start": "ts-node src/server.ts"
+      "start": "ts-node src/server.ts",   
+      "postinstall": "husky install"
+
    }
 }
