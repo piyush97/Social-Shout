@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 import bcrypt from 'bcrypt';
 import { classToPlain, Exclude } from 'class-transformer';
+
 @Entity('users')
 export class User extends BaseEntity {
     constructor(user: Partial<User>) {
