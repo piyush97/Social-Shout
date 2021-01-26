@@ -1,0 +1,18 @@
+{
+   "name": "new-typeorm-project",
+   "version": "0.0.1",
+   "description": "Awesome project developed with TypeORM.",
+   "devDependencies": {
+      "@types/node": "^14.14.22",
+      "ts-node": "^9.1.1",
+      "typescript": "^4.1.3"
+   },
+   "dependencies": {
+      "pg": "^8.4.0",
+      "reflect-metadata": "^0.1.10",
+      "typeorm": "0.2.30"
+   },
+   "scripts": {
+      "start": "ts-node src/server.ts"
+   }
+}
