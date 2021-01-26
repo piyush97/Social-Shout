@@ -1,6 +1,8 @@
 import { isEmpty, validate } from 'class-validator';
 import { Request, Response, Router } from 'express';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import cookie from 'cookie';
 
 import { User } from '../entities/User';
 
@@ -51,11 +53,34 @@ const login = async (req: Request, res: Response) => {
             return res.status(401).json({ password: 'Password is incorrect' });
         }
 
-        return res.json(user);
+        const token = jwt.sign({ username }, process.env.JWT_SECRET);
+
+        res.set(
+            'Set-Cookie',
+            cookie.serialize('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                maxAge: 3600,
+                path: '/',
+            }),
+        );
+        return res.json({ user, token });
     } catch (err) {}
 };
 
+const me = async (req: Request, res: Response) => {
+    try {
+        // const token = req.cookies
+        console.log(req.cookies);
+        return res.json({ message: 'Testing' });
+    } catch (error) {
+        console.error(error);
+        return res.status(401).json({ error: 'Unauthenticated' });
+    }
+};
 const router = Router();
 router.post('/register', register);
 router.post('/login', login);
+router.post('/me', me);
 export default router;
