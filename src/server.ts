@@ -3,11 +3,13 @@ import express from 'express';
 import morgan from 'morgan';
 import { createConnection } from 'typeorm';
 import authRoutes from './routes/auth';
+import trim from './middleware/trim';
 
 const app = express();
 
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(trim);
 
 app.get('/', (_, res) => res.send('Hello'));
 app.use('/api/auth', authRoutes);
