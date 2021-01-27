@@ -26,8 +26,32 @@ const createPost = async (req: Request, res: Response) => {
     }
 };
 
+const getPosts = async (_: Request, res: Response) => {
+    try {
+        const posts = await Post.find({ order: { createdAt: 'DESC' } });
+
+        return res.json(posts);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Something went wrong' });
+    }
+};
+
+const getPost = async (req: Request, res: Response) => {
+    const { identifier, slug } = req.params;
+    try {
+        const posts = await Post.findOneOrFail({ identifier, slug });
+
+        return res.json(posts);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Something went wrong' });
+    }
+};
 const router = Router();
 
 router.post('/', auth, createPost);
+router.get('/', getPosts);
+router.get('/:identifier/:slug', getPost);
 
 export default router;
