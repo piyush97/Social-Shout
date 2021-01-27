@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 
 import auth from '../middleware/auth';
-import { User } from '../entities/User';
+import User from '../entities/User';
 
 const register = async (req: Request, res: Response) => {
     const { email, username, password } = req.body;
