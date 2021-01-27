@@ -15,7 +15,7 @@ const createPost = async (req: Request, res: Response) => {
     try {
         const post = new Post({ title, body, user, subName: sub });
         await post.save();
-        return res.json();
+        return res.json(post);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Something went wrong' });
