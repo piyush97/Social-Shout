@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -29,7 +30,37 @@ export default function Home() {
                 I agree to get emails about cool stuff on Social Shout
               </label>
             </div>
+            <div className="mb-2">
+              <input
+                type="email"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-400 rounded"
+                placeholder="Email"
+              />
+            </div>{" "}
+            <div className="mb-2">
+              <input
+                type="text"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-400 rounded"
+                placeholder="Username"
+              />
+            </div>
+            <div className="mb-2">
+              <input
+                type="password"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-400 rounded"
+                placeholder="Password"
+              />
+            </div>
+            <button className="w-full py-2 mb-4 text-xs font-bold text-white uppercase bg-blue-500 border border-blue-500 rounded bg-blue500">
+              Sign Up
+            </button>
           </form>
+          <small>
+            Already a Social Shouter?{" "}
+            <Link href="/login">
+              <a className="ml-1 text-blue-500 uppercase">Login</a>
+            </Link>
+          </small>
         </div>
       </div>
     </div>
