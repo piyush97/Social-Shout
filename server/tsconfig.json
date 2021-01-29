@@ -13,7 +13,7 @@
       "noImplicitThis": true,
       "alwaysStrict": true,
       "strictNullChecks": true,
-      "noUnusedLocals": true,
+      // "noUnusedLocals": true,
       "noUnusedParameters": true,
       "noImplicitReturns": true,
       "noFallthroughCasesInSwitch": true,
