@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import { createConnection } from 'typeorm';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 import authRoutes from './routes/auth';
 import postsRoutes from './routes/posts';
@@ -14,6 +15,13 @@ import trim from './middleware/trim';
 dotenv.config();
 const app = express();
 
+app.use(
+    cors({
+        credentials: true,
+        origin: process.env.ORIGIN!,
+        optionsSuccessStatus: 200,
+    }),
+);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(trim);
