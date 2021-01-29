@@ -1,4 +1,4 @@
-import classNames from "classNames";
+import classNames from "classnames";
 
 interface InputGroupProps {
   className?: string;
