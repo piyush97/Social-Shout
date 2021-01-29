@@ -1,65 +1,39 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import Link from "next/link";
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+import Logo from "../images/logo.svg";
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+const Navbar: React.FC = () => (
+  <div className="fixed inset-x-0 top-0 z-10 flex items-center justify-center h-12 px-5 bg-white">
+    {/* Logo and title */}
+    <div className="flex items-center">
+      <Link href="/">
+        <a>
+          <Logo className="w-8 h-8 mr-2" />
         </a>
-      </footer>
+      </Link>
+      <span className="text-2xl font-semibold">
+        <Link href="/">Social Shout</Link>
+      </span>
     </div>
-  );
-}
+    {/* Serach Input */}
+    <div className="flex items-center mx-auto bg-gray-100 border rounded hover:border-blue-500 hover:bg-white">
+      <i className="pl-4 pr-3 text-gray-500 fas fa-search "></i>
+      <input
+        type="text"
+        className="py-1 pr-3 bg-transparent rounded w-160 focus:outline-none"
+        placeholder="Search"
+      />
+    </div>
+    {/* Auth buttons */}
+    <div className="flex">
+      <Link href="/login">
+        <a className="w-32 py-1 mr-4 leading-5 hollow blue button">log in</a>
+      </Link>
+      <Link href="/register">
+        <a className="w-32 py-1 leading-5 blue button">sign up</a>
+      </Link>
+    </div>
+  </div>
+);
+
+export default Navbar;
