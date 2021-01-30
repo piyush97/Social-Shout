@@ -21,7 +21,7 @@ export default function Home() {
     return (
         <div className="pt-12">
             <Head>
-                <title>readit: the front page of the internet</title>
+                <title>Social Shout</title>
             </Head>
             <div className="container flex pt-4">
                 {/* Posts feed */}
