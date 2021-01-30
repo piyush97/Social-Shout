@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 
 import InputGroup from '../components/inputGroup';
+import { useAuthDispatch } from '../context/auth';
 
 export default function Home() {
     const [username, setUsername] = useState('');
@@ -12,16 +13,20 @@ export default function Home() {
     const [agreement, setAgreement] = useState(false);
     const [errors, setErrors] = useState<any>({});
 
+    const dispatch = useAuthDispatch();
+
     const router = useRouter();
 
     const submitForm = async (event: FormEvent) => {
         event.preventDefault();
 
         try {
-            await axios.post('/auth/login', {
+            const res = await axios.post('/auth/login', {
                 username,
                 password,
             });
+
+            dispatch({ type: 'LOGIN', payload: res.data });
 
             router.push('/');
         } catch (error) {
