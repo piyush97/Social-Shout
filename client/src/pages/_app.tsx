@@ -2,6 +2,7 @@ import axios from 'axios';
 import { AppProps } from 'next/app';
 
 import '../styles/tailwind.css';
+import '../styles/icons.css';
 
 import Navbar from '../components/Navbar';
 import { Fragment } from 'react';

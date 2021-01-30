@@ -47,10 +47,11 @@ export default class Post extends Entity {
         return `/r/${this.subName}/${this.identifier}/${this.slug}`;
     }
 
+    @Exclude()
     @OneToMany(() => Comment, (comment) => comment.post)
     comments: Comment[];
 
-    // @Exclude() TODO: Visible for testing
+    @Exclude()
     @OneToMany(() => Vote, (vote) => vote.post)
     votes: Vote[];
 
