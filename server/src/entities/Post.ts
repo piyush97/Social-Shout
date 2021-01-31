@@ -1,11 +1,11 @@
 import { Entity as TOEntity, Column, Index, BeforeInsert, ManyToOne, JoinColumn, OneToMany, AfterLoad } from 'typeorm';
+import { Exclude, Expose } from 'class-transformer';
 
 import Entity from './Entity';
 import User from './User';
 import { makeId, slugify } from '../util/helpers';
 import Sub from './Sub';
 import Comment from './Comment';
-import { Exclude, Expose } from 'class-transformer';
 import Vote from './Vote';
 
 @TOEntity('posts')
@@ -17,7 +17,7 @@ export default class Post extends Entity {
 
     @Index()
     @Column()
-    identifier: string;
+    identifier: string; // 7 Character Id
 
     @Column()
     title: string;
@@ -43,10 +43,6 @@ export default class Post extends Entity {
     @JoinColumn({ name: 'subName', referencedColumnName: 'name' })
     sub: Sub;
 
-    @Expose() get url(): string {
-        return `/r/${this.subName}/${this.identifier}/${this.slug}`;
-    }
-
     @Exclude()
     @OneToMany(() => Comment, (comment) => comment.post)
     comments: Comment[];
@@ -55,17 +51,22 @@ export default class Post extends Entity {
     @OneToMany(() => Vote, (vote) => vote.post)
     votes: Vote[];
 
-    protected userVote: number;
-    setUserVote(user: User) {
-        const index = this.votes?.findIndex((v) => v.username === user.username);
-        this.userVote = index > -1 ? this.votes[index].value : 0;
+    @Expose() get url(): string {
+        return `/r/${this.subName}/${this.identifier}/${this.slug}`;
     }
 
     @Expose() get commentCount(): number {
         return this.comments?.length;
     }
+
     @Expose() get voteScore(): number {
-        return this.votes?.reduce((previous, current) => previous + (current.value || 0), 0);
+        return this.votes?.reduce((prev, curr) => prev + (curr.value || 0), 0);
+    }
+
+    protected userVote: number;
+    setUserVote(user: User) {
+        const index = this.votes?.findIndex((v) => v.username === user.username);
+        this.userVote = index > -1 ? this.votes[index].value : 0;
     }
 
     @BeforeInsert()

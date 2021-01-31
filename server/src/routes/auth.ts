@@ -99,6 +99,7 @@ const logout = (_: Request, res: Response) => {
             path: '/',
         }),
     );
+
     return res.status(200).json({ success: true });
 };
 

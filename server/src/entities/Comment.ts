@@ -1,8 +1,8 @@
-import { BeforeInsert, Column, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
-import { Entity as TOEntity } from 'typeorm';
+import { BeforeInsert, Column, Entity as TOEntity, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+
 import Entity from './Entity';
-import User from './User';
 import Post from './Post';
+import User from './User';
 
 import { makeId } from '../util/helpers';
 import Vote from './Vote';

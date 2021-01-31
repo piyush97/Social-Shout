@@ -11,8 +11,8 @@ export default class Sub extends Entity {
         Object.assign(this, sub);
     }
 
-    @Column({ unique: true })
     @Index()
+    @Column({ unique: true })
     name: string;
 
     @Column()
