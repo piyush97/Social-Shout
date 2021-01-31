@@ -13,6 +13,7 @@
       "@types/node": "^14.14.22",
       "@typescript-eslint/eslint-plugin": "^4.14.1",
       "@typescript-eslint/parser": "^4.14.1",
+      "concurrently": "^5.3.0",
       "eslint": "^7.18.0",
       "eslint-config-prettier": "^7.2.0",
       "eslint-plugin-prettier": "^3.3.1",
@@ -35,7 +36,8 @@
       "jsonwebtoken": "^8.5.1",
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.10",
-      "typeorm": "0.2.30"
+      "typeorm": "0.2.30",
+      "typeorm-seeding": "^1.6.1"
    },
    "husky": {
       "hooks": {
@@ -50,8 +52,10 @@
    "scripts": {
       "start": "ts-node src/server.ts",
       "postinstall": "husky install",
-      "dev": "nodemon  --exec ts-node src/server.ts ",
-      "debug":"node  --trace-warnings -r ts-node/register -r  ./src/server.ts",
+      "server": "nodemon  --exec ts-node src/server.ts",
+      "client": "cd ../client && yarn dev",
+      "dev": "concurrently \"yarn server\" \"yarn client\" -n server,client",
+      "debug": "node  --trace-warnings -r ts-node/register -r  ./src/server.ts",
       "typeorm": "ts-node ./node_modules/typeorm/cli.js"
    }
 }
