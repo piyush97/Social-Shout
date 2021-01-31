@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 
 import InputGroup from '../components/inputGroup';
-import { useAuthDispatch } from '../context/auth';
+import { useAuthDispatch, useAuthState } from '../context/auth';
 
 export default function Home() {
     const [username, setUsername] = useState('');
@@ -14,8 +14,10 @@ export default function Home() {
     const [errors, setErrors] = useState<any>({});
 
     const dispatch = useAuthDispatch();
+    const { authenticated } = useAuthState();
 
     const router = useRouter();
+    if (authenticated) router.push('/');
 
     const submitForm = async (event: FormEvent) => {
         event.preventDefault();
@@ -26,7 +28,7 @@ export default function Home() {
                 password,
             });
 
-            dispatch({ type: 'LOGIN', payload: res.data });
+            dispatch('LOGIN', res.data);
 
             router.push('/');
         } catch (error) {
